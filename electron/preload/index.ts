@@ -1,4 +1,15 @@
 import { ipcRenderer, contextBridge } from 'electron'
+import log from 'electron-log/renderer'
+
+
+contextBridge.exposeInMainWorld('electron', {
+  logger: {
+    info: (...args) => log.info(...args),
+    warn: (...args) => log.warn(...args),
+    debug: (...args) => log.debug(...args),
+    error: (...args) => log.error(...args)
+  },
+});
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
