@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
+import { resolve } from 'node:path'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -62,13 +63,29 @@ export default defineConfig(({ command }) => {
         renderer: {},
       }),
     ],
-    server: process.env.VSCODE_DEBUG && (() => {
-      const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
-      return {
-        host: url.hostname,
-        port: +url.port,
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src')
       }
-    })(),
+    },
+    // server: process.env.VSCODE_DEBUG && (() => {
+    //   const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
+    //   return {
+    //     host: url.hostname,
+    //     port: +url.port,
+    //   }
+    // })(),
+    server: {
+      host: '127.0.0.1', // 强制使用 IPv4
+      port: 5173,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8001',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
+    },
     clearScreen: false,
   }
 })

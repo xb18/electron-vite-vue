@@ -1,9 +1,9 @@
 {
-  "name": "electron-vue-vite",
-  "version": "28.1.0",
+  "name": "app-name",
+  "version": "1.0.0",
   "main": "dist-electron/main/index.js",
   "description": "Really simple Electron + Vue + Vite boilerplate.",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "author": "xb18",
   "license": "MIT",
   "private": true,
   "keywords": [
@@ -20,7 +20,7 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "chcp 65001 && vite",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
     "preview": "vite preview"
   },
@@ -34,13 +34,17 @@
     "electron-log": "^5.4.3",
     "electron-store": "^8.2.0",
     "electron-updater": "^6.6.2",
+    "element-plus": "^2.13.0",
     "fs-extra": "^11.3.3",
     "lodash-es": "^4.17.22",
+    "pinia": "^3.0.4",
+    "sass": "^1.97.1",
     "typescript": "^5.4.2",
     "vite": "^5.1.5",
     "vite-plugin-electron": "^0.28.4",
     "vite-plugin-electron-renderer": "^0.14.5",
     "vue": "^3.4.21",
+    "vue-router": "^4.6.4",
     "vue-tsc": "^2.0.6",
     "ws": "^8.18.3"
   }
